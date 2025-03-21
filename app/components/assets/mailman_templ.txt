@@ -1,0 +1,1 @@
+<div class=\"app\"><div class=\"heading-container\">MailMan</div><img src=\"/src/assets/illustrations/mailman.svg\" alt=\"The mailman\"> <button class=\"login-button\">Login</button></div>

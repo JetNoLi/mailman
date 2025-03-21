@@ -1,0 +1,17 @@
+package auth
+
+const (
+	GoogleOAuthProviderUrl = "https://accounts.google.com/o/oauth2/v2/auth"
+)
+
+templ LoginWithGoogle(clientId string, redirectUri string) {
+	<button>
+		<a href={ templ.URL(GoogleOAuthProviderUrl + "?client_id=" + clientId + "&scope=user") }>Login with Google</a>
+	</button>
+}
+
+templ LoginButton() {
+	<button class="login-button">
+		Login
+	</button>
+}

@@ -1,0 +1,1 @@
+<div class=\"app gradient-background\"><p class=\"heading shadow-text\">MailMan</p><img class=\"mailman\" src=\"/src/assets/illustrations/mailman.svg\" alt=\"The mailman\"><div class=\"login-button shadow\" hx-get=\"/pages/login/\" hx-target=\".app\"><button style=\"all:unset\">Login</button></div></div>

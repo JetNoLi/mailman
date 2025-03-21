@@ -1,0 +1,209 @@
+package validation
+
+import (
+	"fmt"
+	"regexp"
+
+	"github.com/jetnoli/doc-sensei/common"
+)
+
+type ValidatorError struct {
+	messages []string
+}
+
+func (vErr *ValidatorError) Error() string {
+	message := ""
+
+	for _, m := range vErr.messages {
+		if message == "" {
+			message = m
+			continue
+		}
+
+		message += "\n" + m
+	}
+	return message
+}
+
+// Create Code that will Run to Generate a type with a Validate Method Attached to It
+
+type ValidatorOptions struct {
+	Message string
+}
+
+type ValidatorOptsFn = common.OptFns[ValidatorOptions]
+
+const EmailRegex = `^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`
+
+func IsEmail(v any, optFns ...ValidatorOptsFn) error {
+	options := ValidatorOptions{}
+	common.CreateOptions(&options, optFns...)
+
+	email, ok := v.(string)
+
+	if !ok {
+		return fmt.Errorf("invalid email provided %s", v)
+	}
+
+	ok, err := regexp.Match(EmailRegex, []byte(email))
+
+	if err != nil {
+		return err
+	}
+
+	if !ok {
+		return fmt.Errorf("invalid email provided %s", v)
+	}
+
+	return nil
+}
+
+func IsString(v any, optFns ...ValidatorOptsFn) error {
+	options := ValidatorOptions{}
+	common.CreateOptions(&options, optFns...)
+
+	_, ok := v.(string)
+
+	if !ok {
+		return fmt.Errorf("invalid email provided %s", v)
+	}
+
+	return nil
+}
+
+func IsInt(v any, optFns ...ValidatorOptsFn) error {
+	options := ValidatorOptions{}
+	common.CreateOptions(&options, optFns...)
+
+	_, ok := v.(int)
+
+	if !ok {
+		return fmt.Errorf("invalid email provided %s", v)
+	}
+
+	return nil
+}
+
+func IsFloat(v any, optFns ...ValidatorOptsFn) error {
+	options := ValidatorOptions{}
+	common.CreateOptions(&options, optFns...)
+
+	_, ok := v.(float64)
+
+	if !ok {
+		return fmt.Errorf("invalid email provided %s", v)
+	}
+
+	return nil
+}
+
+func IsBool(v any, optFns ...ValidatorOptsFn) error {
+	options := ValidatorOptions{}
+	common.CreateOptions(&options, optFns...)
+
+	_, ok := v.(bool)
+
+	if !ok {
+		return fmt.Errorf("invalid email provided %s", v)
+	}
+
+	return nil
+}
+
+type ValidatorFn func() error
+
+// type Validator struct {
+
+// }
+
+type Validator interface {
+	IsValid() error
+}
+
+type Builder struct {
+	Fields      map[string]*Builder
+	ValidatorFn ValidatorFn
+	V           *any
+}
+
+type StringOptions struct {
+	MinLen int
+	MaxLen int
+	Email  bool
+}
+
+type StringValidators = map[string]ValidatorFn
+
+func MinLen(val string, min int) error {
+	if len(val) <= min {
+		return fmt.Errorf("invalid string, minimum length %d exceeded", min)
+	}
+
+	return nil
+}
+
+func MaxLen(val string, max int) error {
+	if len(val) <= max {
+		return fmt.Errorf("invalid string, maximum length %d exceeded", max)
+	}
+
+	return nil
+}
+
+type VString struct {
+	options StringOptions
+}
+
+func (s *VString) WithMinLength(len int) *VString {
+	s.options.MinLen = len
+	return s
+}
+
+func (s *VString) WithMaxLength(len int) *VString {
+	s.options.MaxLen = len
+	return s
+}
+
+func (s VString) IsValid() error {
+	return IsString(s)
+}
+
+type SchemaOptions struct {
+	Validator Validator
+}
+
+type SchemaOptsFn = common.OptFns[SchemaOptions]
+
+type Empty struct {
+}
+
+func (e Empty) IsValid() error {
+	return nil
+}
+
+func Schema(schema map[string]Validator, optFns ...SchemaOptsFn) Builder {
+	options := &SchemaOptions{}
+	common.CreateOptions(options)
+
+	validator := options.Validator
+
+	if validator == nil {
+		validator = Empty{}
+	}
+
+	fmt.Println("validator", validator)
+	builder := &Builder{ValidatorFn: validator.IsValid}
+	fmt.Println("builder", builder)
+
+	// TODO: add guard for nil schema, validator or builwer
+
+	for fieldName, val := range schema {
+		if builder.Fields == nil {
+			builder.Fields = make(map[string]*Builder)
+		}
+
+		builder.Fields[fieldName] = &Builder{ValidatorFn: val.IsValid}
+	}
+
+	return *builder
+}

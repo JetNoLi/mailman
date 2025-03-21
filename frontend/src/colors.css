@@ -1,0 +1,70 @@
+:root {
+    /* Colors */
+    /* --primary-color: rgba(54, 124, 255, 0.65); */
+    /* --secondary-color:    */
+
+    --primary-color: #544b8ce9;
+    --light-accent: rgba(54, 124, 255, 0.85);
+    --font-color: #DFEAEF;
+    --heading-color: #F4F4F4;
+    --border-color: rgba(75, 72, 82, 0.104);
+
+    /* Sizes */
+    --bw-sm: 1px;
+    --bw-md: 2px;
+    --bw-lg: 4px;
+
+    --br-sm: 4px;
+    --br-md: 6px;
+    --br-lg: 8px;
+    --br-vlg: 12px;
+    --br-xlg: 16px;
+
+    --fs-footnote: 13px;
+    --fs-sm: 14px;
+    --fs-md: 16px;
+    --fs-lg: 18px;
+    --fs-vlg: 24px;
+    --fs-xlg: 32px;
+    --fs-title: 44px;
+}
+
+/* 
+    Faded Purple -5d4fae81
+    Smooth Purple - #453c75e9
+    Dark Purple - #331dade9
+
+
+*/
+
+.gradient-background {
+    /* background-image: linear-gradient(to bottom right, #41838f71 19%, #5c5d9530 73%, #4c428c49); */
+    background-image: linear-gradient(to bottom right, #1b5cb771 19%, #7071c578 73%, #1b5cb771);
+    /* background-image: linear-gradient(to bottom right, #41558FA6 19%, #5C5D958F 73%, #4c428c80); */
+    /* background-image: linear-gradient(to bottom right, #2e57c9bf 10%, #46479aa6 43%, #3437e68f 84%, #18048780 100%); */
+    /* background-image: linear-gradient(to bottom right, #1d43ade9 10%, #331dade9 43%, #4434a1e9 55%, #5441c1ae 72%, #7b3de686 86%); */
+    /* background-image: linear-gradient(to bottom right, #4841a8e9 10%, #41338ca5 43%, #8276c8c1 55%, #5441c174 72%, #6e3bc6a5 86%); */
+    /* background-color: var(--primary-color); */
+}
+
+.gradient-foreground {
+    /* background-image: linear-gradient(to bottom right, #2a459349 19%, #5c5d9522 63%, #46489c30 84%, #4c428c39 100%); */
+    background-color: #53498a29;
+    /* background-color: #453c75e9; */
+}
+
+.shadow-text {
+    text-shadow: 0px 0px 12px rgba(151, 131, 193, 0.33)
+}
+
+.shadow {
+    box-shadow: 0px 1px 4px 2px var(--border-color);
+}
+
+.strong-shadow {
+    /* box-shadow: 1px 1px 16px 1px #52498785 */
+    box-shadow: 0px 0px 12px 1px #625a9079
+        /* box-shadow: 1px 1px 12px 1px #5c519b5e; */
+
+        /* var(--border-color); */
+}
