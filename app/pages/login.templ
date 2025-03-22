@@ -1,8 +1,8 @@
 package pages
 
 templ Login() {
-	<div class="login-form-container transition gradient-foreground strong-shadow">
-		<form class="login-form" hx-post="/auth/login/">
+	<div class="login-form-container transition">
+		<form class="login-form" hx-post="/auth/login/" hx-target=".app" hx-swap="outerHTML">
 			<p class="heading shadow-text">MailMan</p>
 			<div class="login-form-body">
 				<div class="login-field-container">
@@ -14,7 +14,7 @@ templ Login() {
 					<input name="password" class="login-field" type="password"/>
 				</div>
 			</div>
-			<div>
+			<div class="login-buttons-container">
 				<div class="login-button shadow">
 					<button style="all:unset" type="submit">
 						Login

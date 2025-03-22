@@ -4,6 +4,11 @@ html {
     color: white;
 }
 
+p {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     margin: 0;
     color: white;
@@ -12,16 +17,19 @@ body {
         sans-serif;
 }
 
+
+
 /* Landing Page */
 .app {
     height: 100vh;
-    width: 100vw;
     text-align: center;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
+    transition: all;
 }
+
 
 .mailman {
     width: auto;
@@ -40,11 +48,12 @@ body {
     border-radius: var(--br-sm);
     color: var(--font-color);
     border-width: 0;
+    transition: scale 0.5s ease;
 }
 
 .login-button:hover {
     cursor: pointer;
-    animation: scaleAnim 0.5s forwards;
+    scale: 1.1;
 }
 
 .heading {
@@ -118,9 +127,20 @@ body {
     width: 250px;
 }
 
-.socials-container {}
+.login-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.socials-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
 .socials-buttons {
+    padding: 8px;
     display: flex;
     gap: 32px;
     justify-content: center;
@@ -134,4 +154,186 @@ body {
 
 .social-logo:hover {
     cursor: pointer;
+}
+
+/* Home Page */
+#home {}
+
+.home-row {
+    height: 80%;
+    width: 85%;
+    margin-left: 5%;
+    max-height: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 8%;
+
+}
+
+.home-main-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* border: 1px solid var(--primary-color); */
+    height: 100%;
+    flex: 3;
+    border-radius: var(--br-md);
+    gap: 24px;
+}
+
+.home-main-menu-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--br-lg);
+    flex: 1;
+    /* box-shadow: var(--shadow); */
+    transition: scale 0.5s ease;
+    border: 2px solid var(--border-color)
+}
+
+.home-main-menu-option:hover {
+    cursor: pointer;
+    background-image: var(--background-gradient);
+    box-shadow: var(--strong-shadow);
+    scale: 1.1;
+    border: none;
+}
+
+.home-main-menu-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.home-main-menu-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: center;
+    margin-left: 64px;
+    text-align: left;
+    height: 100%;
+    text-align: left;
+    gap: 24px;
+    color: var(--font-color);
+    font-size: var(--fs-xlg);
+    font-weight: 100;
+    flex: 1;
+}
+
+.home-main-menu-option-info {
+    font-size: var(--fs-lg);
+    font-style: italic;
+}
+
+.home-side-bar {
+    flex: 1;
+    border-radius: var(--br-md);
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+}
+
+.home-side-menu {
+    text-align: left;
+    border-radius: var(--br-md);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.home-side-menu-h {
+    color: var(--font-color);
+    font-size: var(--fs-lg);
+    padding: 0px 4px;
+}
+
+.home-side-menu-label {
+    display: inline-block;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    height: min-content;
+}
+
+.home-side-menu-content {
+    min-height: 180px;
+    padding: 12px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.home-side-menu-h2 {
+    font-size: var(--fs-md);
+    color: var(--font-color);
+}
+
+.main-menu-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+}
+
+
+.main-menu-image {
+    width: 100px;
+    height: auto;
+}
+
+.mailbox-icon-sm {
+    opacity: 0.65;
+    height: 18px;
+    width: auto;
+}
+
+.mailbox-text {
+    font-size: var(--fs-md)
+}
+
+.main-menu-mailbox-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 8%;
+    min-height: 42px;
+    transition: scale 0.5s ease;
+}
+
+.main-menu-mailbox-card:hover {
+    cursor: pointer;
+    scale: 1.1
+}
+
+
+.home-side-menu-text {
+    font-size: var(fs-sm);
+    font-size: italic;
+}
+
+.logout-icon {
+    height: 32px;
+    width: auto;
+}
+
+.logout-icon:hover {
+    cursor: pointer;
+}
+
+.logout-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 90%;
 }

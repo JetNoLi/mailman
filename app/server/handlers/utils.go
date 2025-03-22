@@ -88,3 +88,13 @@ func RenderJson(w *http.ResponseWriter, r *http.Request, data any) error {
 
 	return renderer.Render(*w, r)
 }
+
+func TemplHandler(comp templ.Component) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		err := RenderTempl(&w, r, comp)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	}
+
+}

@@ -3,6 +3,7 @@ package handlers
 import (
 	"ewails/app/components/assets"
 	"ewails/app/components/auth"
+	"ewails/app/pages"
 	"net/http"
 	"os"
 )
@@ -11,14 +12,17 @@ const (
 	GoogleOAuthProviderUrl = "https://accounts.google.com/o/oauth2/v2/auth"
 )
 
-// func LoginWithEmailAndPassword(w http.ResponseWriter, r *http.Request) {
-// 	LoginButton := auth.LoginWithEmailAndPassword()
-// 	err := RenderTempl(&w, r, LoginButton)
+func LoginWithEmailAndPassword(w http.ResponseWriter, r *http.Request) {
+	// TODO: Email Shit
 
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 	}
-// }
+	// Render Page
+	Home := pages.Home()
+	err := RenderTempl(&w, r, Home)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
 
 func GoogleOAuthInitiate(w http.ResponseWriter, r *http.Request) {
 	LoginButton := auth.LoginWithGoogle(os.Getenv("CLIENT_ID"), os.Getenv("GOOGLE_REDIRECT_URI"))

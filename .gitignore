@@ -3,3 +3,4 @@ node_modules
 frontend/dist
 *.env
 *_templ.go
+*_templ.txt

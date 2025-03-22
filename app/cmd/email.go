@@ -2,6 +2,7 @@ package main
 
 import (
 	"ewails/app/server/config"
+	"ewails/app/server/services"
 	"fmt"
 	"io"
 	"log"
@@ -11,6 +12,9 @@ import (
 	"github.com/emersion/go-imap/v2/imapclient"
 	"github.com/emersion/go-message/mail"
 )
+
+// var EmailServerAddr = "imap.gmail.com:993"
+var EmailServerAddr = "imap.secureserver.net:993"
 
 func ProcessMail(c *imapclient.Client, seqNum uint32) (imap.FetchItemBodySection, error) {
 	// Send a FETCH command to fetch the message body
@@ -99,9 +103,6 @@ func ProcessMail(c *imapclient.Client, seqNum uint32) (imap.FetchItemBodySection
 func GetEmail() {
 	config.ReadEnv()
 
-	// var EmailServerAddr = "imap.gmail.com:993"
-	var EmailServerAddr = "imap.secureserver.net:993"
-
 	var Email = os.Getenv("TEST_EMAIL")
 	var Pswd = os.Getenv("TEST_EMAIL_PSWD")
 
@@ -177,7 +178,7 @@ func GetEmail() {
 
 	fmt.Println("email id yeah", emailId)
 
-	email, err := ProcessMail(client, uint32(emailId))
+	email, err := ProcessMail(client, 95)
 
 	if err != nil {
 		log.Fatalf("error processing mail: %s", err.Error())
@@ -188,6 +189,48 @@ func GetEmail() {
 
 }
 
+func Read() {
+	config.ReadEnv()
+
+	es, err := services.NewEmailService(EmailServerAddr)
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	var Email = os.Getenv("TEST_EMAIL")
+	var Pswd = os.Getenv("TEST_EMAIL_PSWD")
+
+	err = es.Login(Email, Pswd)
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	mailboxes, err := es.ListMailboxes()
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	fmt.Println("mailboxes, ", mailboxes)
+
+	err = es.ConnectToMailbox("INBOX", true)
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	msgs, err := es.ListMail(5)
+
+	if err != nil {
+		log.Fatal("error listing messages", err)
+	}
+
+	fmt.Println(msgs)
+}
+
 func main() {
-	GetEmail()
+	// GetEmail()
+	Read()
 }
