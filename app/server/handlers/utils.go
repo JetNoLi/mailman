@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"ewails/app/server/services"
 	"fmt"
 	"net/http"
 
@@ -97,4 +98,28 @@ func TemplHandler(comp templ.Component) http.HandlerFunc {
 		}
 	}
 
+}
+
+func GetEmailService(r *http.Request) (*services.EmailService, error) {
+	val := r.Context().Value("emailService")
+
+	es, ok := val.(*services.EmailService)
+
+	if !ok {
+		return nil, fmt.Errorf("invalid email service")
+	}
+
+	return es, nil
+}
+
+func SetEmailService(r *http.Request, es *services.EmailService) error {
+	currentService, err := GetEmailService(r)
+
+	if err != nil {
+		return err
+	}
+
+	*currentService = *es
+
+	return nil
 }

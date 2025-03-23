@@ -1,0 +1,26 @@
+package email
+
+templ AccountInfoMenu(email string, imapServer string) {
+	<div class="home-side-menu">
+		<div class="home-side-menu-label">
+			<p class="home-side-menu-h">Account</p>
+		</div>
+		<div style="gap:24px" class="home-side-menu-content">
+			<div>
+				<p class="home-side-menu-h2">
+					Email:
+					<p class="home-side-menu-text">{ email }</p>
+				</p>
+			</div>
+			<div>
+				<p class="home-side-menu-h2">
+					Imap:
+					<p class="home-side-menu-text">{ imapServer }</p>
+				</p>
+			</div>
+			<div class="logout-container">
+				<img class="logout-icon" src="src/assets/icons/svg/Logout.svg" alt="marketing svg"/>
+			</div>
+		</div>
+	</div>
+}

@@ -1,0 +1,71 @@
+package email
+
+import (
+	"ewails/app/server/services"
+	"fmt"
+)
+
+// Helpers - TODO: Move
+func If(conditional bool, val string) string {
+	if !conditional {
+		return ""
+	}
+
+	return val
+}
+
+func GetMailBoxName(mailBox services.Mailbox) string {
+	if mailBox.Name == "INBOX" {
+		return "Inbox"
+	}
+	return mailBox.Name
+}
+
+func SortMailBoxes(mailboxes []services.Mailbox) []services.Mailbox {
+	for i, mailbox := range mailboxes {
+		switch mailbox.Name {
+		case "INBOX":
+			{
+				if i == 0 {
+					break
+				}
+
+				prev := mailboxes[0]
+				mailboxes[0] = mailbox
+				mailboxes[i] = prev
+				break
+			}
+		default:
+			break
+
+		}
+	}
+
+	return mailboxes
+}
+
+//TODO: Add refresh or poll?
+templ MailBoxMenu(selectedMailbox string, mailBoxes []services.Mailbox) {
+	<div class="home-side-menu">
+		<div class="home-side-menu-label">
+			<p class="home-side-menu-h">Mailbox</p>
+		</div>
+		<div class="home-side-menu-content ">
+			for _, mailBox := range SortMailBoxes(mailBoxes) {
+				<div class={ "main-menu-mailbox-card" }>
+					<img
+						class={ "mailbox-icon-sm" + If(mailBox.Name == selectedMailbox, " shadow") }
+						src="src/assets/icons/svg/email.svg"
+						alt="email svg"
+					/>
+					<p class="mailbox-text">{ GetMailBoxName(mailBox) }</p>
+					<div class="mailbox-info-summary">
+						<p class="mailbox-text-sm">
+							{  fmt.Sprintf("%d", mailBox.Unread) }
+						</p>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+}

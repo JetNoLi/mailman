@@ -12,7 +12,8 @@ import (
 )
 
 type EmailService struct {
-	client *imapclient.Client
+	client  *imapclient.Client
+	account *EmailAccount
 }
 
 // TODO: Create opts funcs later
@@ -24,7 +25,8 @@ func NewEmailService(imapServer string) (EmailService, error) {
 	}
 
 	return EmailService{
-		client: client,
+		client:  client,
+		account: &EmailAccount{},
 	}, nil
 }
 
@@ -131,8 +133,26 @@ func ParseEmail(data *imapclient.FetchMessageData) (Email, error) {
 	return e, nil
 }
 
+func (es *EmailService) SetClient(client *imapclient.Client) {
+	es.client = client
+}
+
+func (es *EmailService) SetAccount(accountDetails *EmailAccount) {
+	es.account = accountDetails
+}
+
 func (es *EmailService) Login(email string, password string) error {
 	return es.client.Login(email, password).Wait()
+}
+
+type EmailAccount struct {
+	Addr       string
+	ImapServer string
+}
+
+func (es *EmailService) GetAccountInfo() EmailAccount {
+	return *es.account
+
 }
 
 type Mailbox struct {

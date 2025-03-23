@@ -1,87 +1,12 @@
 package pages
 
-var mailBoxList = []string{"Inbox", "Spam", "Sent", "Archived", "Deleted"}
-
 templ Home() {
 	<div id="home" class="app gradient-background">
 		<div class="home-row transition">
-			<div class="home-main-menu ">
-				<div class="home-main-menu-option">
-					<div class="home-main-menu-content">
-						<div class="home-main-menu-title">
-							<p>Quick Search</p>
-							<p class="home-main-menu-option-info">
-								22, 000 Total Emails
-							</p>
-						</div>
-						<div class="main-menu-image-container">
-							<img class="main-menu-image" style="width:80px" src="src/assets/images/search.svg" alt="search files svg"/>
-						</div>
-					</div>
-				</div>
-				<div class="home-main-menu-option ">
-					<div class="home-main-menu-content">
-						<div class="home-main-menu-title">
-							<p>Quick Sort</p>
-							<p class="home-main-menu-option-info">
-								10, 000 Unread Emails
-							</p>
-						</div>
-						<div class="main-menu-image-container">
-							<img class="main-menu-image" src="src/assets/images/Folders.svg" style="width:120px" alt="sort files svg"/>
-						</div>
-					</div>
-				</div>
-				<div class="home-main-menu-option">
-					<div class="home-main-menu-content">
-						<div class="home-main-menu-title">
-							<p>Subscription Manager </p>
-							<p class="home-main-menu-option-info">
-								10 Active Subscriptions
-							</p>
-						</div>
-						<div class="main-menu-image-container">
-							<img class="main-menu-image" src="src/assets/images/marketing.svg" alt="marketing svg"/>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div class="home-main-menu" hx-get="/components/home/main-menu/" hx-trigger="load"></div>
 			<div class="home-side-bar">
-				<div class="home-side-menu ">
-					<div class="home-side-menu-label">
-						<p class="home-side-menu-h">Mailbox</p>
-					</div>
-					<div class="home-side-menu-content ">
-						for _, mailBox := range mailBoxList {
-							<div class="main-menu-mailbox-card">
-								<img class="mailbox-icon-sm" src="src/assets/icons/svg/email.svg" alt="email svg"/>
-								<p class="mailbox-text">{ mailBox }</p>
-							</div>
-						}
-					</div>
-				</div>
-				<div class="home-side-menu">
-					<div class="home-side-menu-label">
-						<p class="home-side-menu-h">Account</p>
-					</div>
-					<div style="gap:24px" class="home-side-menu-content">
-						<div>
-							<p class="home-side-menu-h2">
-								Email:
-								<p class="home-side-menu-text">jjedijet@gmail.com </p>
-							</p>
-						</div>
-						<div>
-							<p class="home-side-menu-h2">
-								Imap:
-								<p class="home-side-menu-text">imap.secure.net:993 </p>
-							</p>
-						</div>
-					</div>
-					<div class="logout-container">
-						<img class="logout-icon" src="src/assets/icons/svg/Logout.svg" alt="marketing svg"/>
-					</div>
-				</div>
+				<div hx-get="/components/email/mailbox/menu/" hx-trigger="load" hx-swap="outerHTML"></div>
+				<div hx-get="/components/email/account/menu/" hx-trigger="load" hx-swap="outerHTML"></div>
 			</div>
 		</div>
 	</div>

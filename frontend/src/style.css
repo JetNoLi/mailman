@@ -17,6 +17,10 @@ body {
         sans-serif;
 }
 
+/* FOR WAILS TEMPLATE  */
+#wails-spinner {
+    display: none;
+}
 
 
 /* Landing Page */
@@ -335,5 +339,8 @@ body {
 .logout-container {
     display: flex;
     justify-content: flex-end;
-    width: 90%;
+    flex: 1;
+    align-items: center;
+    width: 80%;
+    margin-top: 12px;
 }

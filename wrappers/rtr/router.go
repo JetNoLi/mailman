@@ -85,7 +85,10 @@ func (r *Router) Use(path string, router *Router) {
 
 	prefix := basePath[:len(basePath)-1]
 
-	r.Mux.Handle(fullPath, http.StripPrefix(prefix, router.Mux))
+	handlerFunc := http.HandlerFunc(router.Mux.ServeHTTP)
+	handler := r.createHandler(HandlerOptions{}, handlerFunc)
+
+	r.Mux.Handle(fullPath, http.StripPrefix(prefix, handler))
 }
 
 func (r *Router) UseHandler(path string, handler http.Handler) {
@@ -96,14 +99,6 @@ func (r *Router) UseHandler(path string, handler http.Handler) {
 	h := r.createHandler(HandlerOptions{}, handler.ServeHTTP)
 
 	r.Mux.Handle(basePath, http.StripPrefix(prefix, h))
-}
-
-func (r *Router) UseMux(path string, mux *http.ServeMux) {
-	fullPath := common.ComposePath(r.path, path)
-
-	prefix := fullPath[:len(fullPath)-1]
-
-	r.Mux.Handle(fullPath, http.StripPrefix(prefix, mux))
 }
 
 func (r *Router) UseMiddleware(middlewareFns ...MiddlewareFn) {
@@ -137,6 +132,10 @@ func (r *Router) Patch(path string, handler http.HandlerFunc, optFns ...HandlerO
 
 func (r *Router) Delete(path string, handler http.HandlerFunc, optFns ...HandlerOptsFn) {
 	r.RegisterPath("DELETE", path, handler, optFns...)
+}
+
+func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	r.Mux.ServeHTTP(w, req)
 }
 
 func (r *Router) ToServer(addr string) *http.Server {

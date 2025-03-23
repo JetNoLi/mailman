@@ -1,0 +1,29 @@
+package home
+
+type MenuOption struct {
+	Title   string
+	SubText string
+	Asset   string
+}
+
+templ MainMenuOption(option MenuOption) {
+	<div class="home-main-menu-option">
+		<div class="home-main-menu-content">
+			<div class="home-main-menu-title">
+				<p>{  option.Title }</p>
+				<p class="home-main-menu-option-info">
+					{ option.SubText }
+				</p>
+			</div>
+			<div class="main-menu-image-container">
+				<img class="main-menu-image" src={ option.Asset } alt="search files svg"/>
+			</div>
+		</div>
+	</div>
+}
+
+templ MainMenuOptions(options []MenuOption) {
+	for _, option := range options {
+		@MainMenuOption(option)
+	}
+}

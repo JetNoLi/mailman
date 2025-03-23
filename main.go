@@ -1,8 +1,11 @@
 package main
 
 import (
+	"context"
 	"embed"
 	"ewails/app/server"
+	"ewails/app/server/config"
+	"ewails/app/server/services"
 	"net/http"
 
 	"github.com/wailsapp/wails/v2"
@@ -15,8 +18,16 @@ var assets embed.FS
 
 func main() {
 	// Create an instance of the app structure
+	config.ReadEnv()
 	app := NewApp()
-	r := server.Create()
+	es := services.EmailService{}
+
+	serverMiddleware := func(w http.ResponseWriter, r *http.Request) {
+		ctx := context.WithValue(r.Context(), "emailService", &es)
+		*r = *r.WithContext(ctx)
+	}
+
+	r := server.Create(serverMiddleware)
 
 	// Create application with options
 	err := wails.Run(&options.App{

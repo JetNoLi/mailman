@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func Create() *rtr.Router {
+func Create(middleware ...rtr.MiddlewareFn) *rtr.Router {
 	config.ReadEnv()
 
 	r := rtr.New("/")
@@ -17,8 +17,11 @@ func Create() *rtr.Router {
 		fmt.Println("getting request")
 	})
 
+	r.UseMiddleware(middleware...)
+
 	r.Use("/auth/", routes.AuthRouter())
 	r.Use("/pages/", routes.PagesRouter())
+	r.Use("/components/", routes.CompRouter())
 
 	return r
 }

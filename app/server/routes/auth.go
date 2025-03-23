@@ -8,7 +8,6 @@ import (
 func AuthRouter() *rtr.Router {
 
 	authRouter := rtr.New("/")
-
 	authRouter.Post("/login/", handlers.LoginWithEmailAndPassword)
 
 	authRouter.Post("/mailman/", handlers.MailMainImage)
