@@ -1,13 +1,18 @@
 package home
 
 type MenuOption struct {
-	Title   string
-	SubText string
-	Asset   string
+	Title        string
+	SubText      string
+	Asset        string
+	OnClickHxGet string
 }
 
 templ MainMenuOption(option MenuOption) {
-	<div class="home-main-menu-option">
+	<div
+		class="home-main-menu-option"
+		hx-get={ option.OnClickHxGet }
+		hx-target=".home-main-menu"
+	>
 		<div class="home-main-menu-content">
 			<div class="home-main-menu-title">
 				<p>{  option.Title }</p>
@@ -23,7 +28,9 @@ templ MainMenuOption(option MenuOption) {
 }
 
 templ MainMenuOptions(options []MenuOption) {
-	for _, option := range options {
-		@MainMenuOption(option)
-	}
+	<div class="home-main-menu-options-container">
+		for _, option := range options {
+			@MainMenuOption(option)
+		}
+	</div>
 }

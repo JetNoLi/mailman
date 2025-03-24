@@ -1,8 +1,15 @@
 package pages
 
 templ Index() {
-	<div class="app gradient-background">
-		<p class="heading shadow-text">MailMan</p>
+	<div class="app">
+		<p
+			hx-get="/testing/skip-login/"
+			hx-target=".app"
+			class="heading shadow-text"
+			hx-swap="outerHTML"
+		>
+			MailMan
+		</p>
 		<img class="mailman" src="/src/assets/illustrations/mailman.svg" alt="The mailman"/>
 		<div
 			class="login-button shadow"

@@ -77,12 +77,20 @@ func GetMainMenuOptions(w http.ResponseWriter, r *http.Request) {
 	totalUnreadTxt := fmt.Sprintf("%d Total Unread Emails", totalUnread)
 
 	options := []home.MenuOption{
-		{Title: "Quick Search", SubText: totalTxt, Asset: "src/assets/images/search.svg"},
+		{Title: "Quick Search", SubText: totalTxt, Asset: "src/assets/images/search.svg", OnClickHxGet: "/components/home/menu/search/"},
 		{Title: "Quick Sort", SubText: totalUnreadTxt, Asset: "src/assets/images/Folders.svg"},
 		{Title: "Subscription Manager", SubText: "", Asset: "src/assets/images/marketing.svg"},
 	}
 
 	err = RenderTempl(&w, r, home.MainMenuOptions(options))
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func GetSearchMenu(w http.ResponseWriter, r *http.Request) {
+	err := RenderTempl(&w, r, home.SearchMenu())
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

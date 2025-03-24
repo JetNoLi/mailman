@@ -1,4 +1,1 @@
-<div id=\"home\"><div class=\"home-main-menu\"><div class=\"home-main-menu-option\"><div class=\"home-main-menu-title\"></div></div><div class=\"home-main-menu-option\"><div class=\"home-main-menu-title\"></div></div></div><div class=\"home-side-bar\"><div class=\"home-side-menu\"><div class=\"home-side-menu-label\"><p class=\"home-side-menu-h\">Mailbox</p></div><div class=\"home-side-menu-content\">
-<div>
-</div>
-</div></div><div class=\"home-side-menu\"><div class=\"home-side-menu-label\"><p class=\"home-side-menu-h\">Account</p></div><div class=\"home-side-menu-content\"><div><p class=\"home-side-menu-h2\">Email:</p><p class=\"home-side-menu-h2\">Imap:</p></div></div></div></div></div>
+<div id=\"home\"><div class=\"home-row transition\"><div class=\"home-side-bar\"><div hx-get=\"/components/email/mailbox/menu/\" hx-trigger=\"load\" class=\"home-side-menu-layout-container\"></div><div hx-get=\"/components/email/account/menu/\" class=\"home-side-bar-layout-container\" hx-trigger=\"load\"></div></div><div class=\"home-main-menu\"><div class=\"home-main-menu-options-layout\" hx-get=\"/components/home/main-menu/\" hx-trigger=\"load\"></div></div></div></div>

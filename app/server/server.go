@@ -2,6 +2,7 @@ package server
 
 import (
 	"ewails/app/server/config"
+	"ewails/app/server/handlers"
 	"ewails/app/server/routes"
 	"ewails/wrappers/rtr"
 	"fmt"
@@ -18,6 +19,8 @@ func Create(middleware ...rtr.MiddlewareFn) *rtr.Router {
 	})
 
 	r.UseMiddleware(middleware...)
+
+	r.Get("/testing/skip-login/", handlers.TestingLoginSkip)
 
 	r.Use("/auth/", routes.AuthRouter())
 	r.Use("/pages/", routes.PagesRouter())

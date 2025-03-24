@@ -1,0 +1,33 @@
+package home
+
+templ SearchBar() {
+	<div class="search-bar-container">
+		<div class="search-bar">
+			<img class="search-bar-icon" src="src/assets/icons/svg/search-thin.svg" alt="search icon"/>
+			<input
+				class="search-bar-input"
+				hx-get="/components/search-bar-options/"
+				hx-trigger="input changed delay:0.5s"
+				type="text"
+			/>
+			<img class="search-bar-icon search-bar-cross" src="src/assets/icons/svg/cross.svg" alt="search icon"/>
+		</div>
+		<div class="search-bar-dd-container"></div>
+	</div>
+}
+
+templ SearchBarDropdown() {
+	<div class="search-bar-dd">
+		<div class="search-bar-dd-option">Option 1</div>
+		<div class="search-bar-dd-option">Option 2</div>
+		<div class="search-bar-dd-option">Option 3</div>
+	</div>
+}
+
+templ SearchMenu() {
+	<div class="search-menu-container">
+		<div class="search-bar-menu-container">
+			@SearchBar()
+		</div>
+	</div>
+}

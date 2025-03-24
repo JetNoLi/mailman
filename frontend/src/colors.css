@@ -4,15 +4,24 @@
     /* --secondary-color:    */
 
     --primary-color: #544b8ce9;
-    --light-accent: rgba(54, 124, 255, 0.85);
+    --light-accent: rgba(185, 168, 227, 0.85);
+    --accent: rgba(98, 88, 129, 0.548);
     --font-color: #DFEAEF;
-    --heading-color: #F4F4F4;
-    --border-color: rgba(75, 72, 82, 0.104);
+    --font-dark: rgba(44, 44, 53, 0.954);
+
+    --heading-color: #f4f4f4e6;
+    --light-border: rgba(75, 72, 82, 0.104);
+    --border-color: rgba(97, 92, 108, 0.31);
+    --background-color: rgba(65, 51, 100, 0.894);
 
     --background-gradient: linear-gradient(to bottom right, #1b35b781 19%, #7071c578 73%, #1b5cb771);
+    /* --background-gradient: linear-gradient(to bottom right, rgba(65, 51, 100, 0.894) 19%, rgba(65, 51, 100, 0.78) 73%, rgba(65, 51, 100, 0.694)); */
+    /* --background-gradient: linear-gradient(to bottom right, #251778ab 19%, #261b54a9 53%, #38157db8 78%, #44306bbd); */
+    --glass: linear-gradient(to bottom right, #9698a11e 19%, #a5a6de22 73%, #3f42460c);
 
     --soft-shadow: 0px 0px 12px 1px;
     --strong-shadow: 0px 0px 12px 1px #625a9079;
+    --strong-shadow-b: 0px 4px 12px 1px #625a9079;
     --shadow: 0px 1px 4px 2px var(--border-color);
 
     /* Sizes */
@@ -65,7 +74,7 @@
 }
 
 .shadow {
-    box-shadow: 1px 1px 6px 1px #625a9079;
+    box-shadow: 1px 1px 8px 1px #61589576;
 }
 
 .strong-shadow {

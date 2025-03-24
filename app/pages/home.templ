@@ -1,12 +1,26 @@
 package pages
 
 templ Home() {
-	<div id="home" class="app gradient-background">
+	<div id="home">
 		<div class="home-row transition">
-			<div class="home-main-menu" hx-get="/components/home/main-menu/" hx-trigger="load"></div>
 			<div class="home-side-bar">
-				<div hx-get="/components/email/mailbox/menu/" hx-trigger="load" hx-swap="outerHTML"></div>
-				<div hx-get="/components/email/account/menu/" hx-trigger="load" hx-swap="outerHTML"></div>
+				<div
+					hx-get="/components/email/mailbox/menu/"
+					hx-trigger="load"
+					class="home-side-menu-layout-container"
+				></div>
+				<div
+					hx-get="/components/email/account/menu/"
+					class="home-side-bar-layout-container"
+					hx-trigger="load"
+				></div>
+			</div>
+			<div class="home-main-menu">
+				<div
+					class="home-main-menu-options-layout"
+					hx-get="/components/home/main-menu/"
+					hx-trigger="load"
+				></div>
 			</div>
 		</div>
 	</div>

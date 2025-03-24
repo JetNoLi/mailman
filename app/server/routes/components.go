@@ -9,6 +9,7 @@ func CompRouter() *rtr.Router {
 	r := rtr.New("/")
 
 	r.Get("/home/main-menu", handlers.GetMainMenuOptions)
+	r.Get("/home/menu/search", handlers.GetSearchMenu)
 	emailRtr := rtr.New("/email/")
 
 	emailRtr.Get("/mailbox/menu", handlers.GetMailboxMenu)
